@@ -132,7 +132,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                   '$fullName',
                                   style: const TextStyle(
                                       fontSize: AppFonts.xLarge,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primaryColor),
                                 ),
                                 Text(
                                   '$email',
@@ -222,7 +223,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Text(
-                              'Trợ giúp và báo lỗi',
+                              'Trợ giúp và hỗ trợ',
                               style: TextStyle(
                                 fontSize: AppFonts.large,
                                 fontWeight: FontWeight.bold,
@@ -293,6 +294,43 @@ class _AccountScreenState extends State<AccountScreen> {
                                     ),
                                     Text(
                                       'Liên hệ SmartKho',
+                                      style: TextStyle(
+                                          fontSize: AppFonts.medium,
+                                          color: AppColors.textColorBold),
+                                    ),
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.arrow_right,
+                                  color: AppColors.iconColor,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: AppColors.whiteColor,
+                          ),
+                          onPressed: () {},
+                          child: const SizedBox(
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.priority_high,
+                                      color: AppColors.iconColor,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Báo lỗi',
                                       style: TextStyle(
                                           fontSize: AppFonts.medium,
                                           color: AppColors.textColorBold),
