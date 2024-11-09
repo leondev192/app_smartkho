@@ -1,81 +1,81 @@
-# SmartKho - Ứng dụng Quản Lý Kho Thông Minh
+# SmartKho - Intelligent Warehouse Management Application
 
-SmartKho là một giải pháp quản lý kho toàn diện, giúp tự động hóa các hoạt động nhập/xuất kho và kiểm kê, nhằm tối ưu hóa hiệu suất và giảm thiểu sai sót trong quy trình quản lý kho. Dự án này bao gồm Web Dashboard cho quản lý, Ứng dụng Di Động cho nhân viên kho và Backend API với các công nghệ chính: NestJS, ReactJS, Flutter và MongoDB.
+SmartKho is a comprehensive warehouse management solution that automates inbound/outbound operations and inventory checks, aiming to optimize efficiency and reduce errors in warehouse management processes. This project includes a Web Dashboard for managers, a Mobile Application for warehouse staff, and a Backend API, developed with main technologies: NestJS, ReactJS, Flutter, and MongoDB.
 
-## Mục Tiêu
+## Objectives
 
-SmartKho hỗ trợ các doanh nghiệp trong việc:
+SmartKho supports businesses in:
 
-- Theo dõi tồn kho chính xác và kịp thời.
-- Tối ưu hóa quy trình nhập/xuất kho.
-- Giảm thiểu rủi ro hết hàng và dư thừa hàng hóa.
-- Đơn giản hóa thao tác kiểm kê và báo cáo cho nhân viên kho.
+- Accurately and promptly tracking inventory.
+- Optimizing the inbound/outbound workflow.
+- Reducing the risks of stockouts and overstocking.
+- Simplifying inventory checks and reporting for warehouse staff.
 
-## Tính Năng
+## Features
 
-### 1. Tính Năng Web Dashboard (Dành cho Quản Lý)
+### 1. Web Dashboard Features (For Management)
 
-Web Dashboard là công cụ quản trị, giúp quản lý có thể điều hành và giám sát toàn bộ hoạt động kho với các tính năng sau:
+The Web Dashboard is an administrative tool, enabling managers to control and monitor all warehouse activities with the following features:
 
-- **Quản lý Người Dùng**:
+- **User Management**:
 
-  - Thêm, sửa, xóa tài khoản người dùng.
-  - Phân quyền người dùng với vai trò (Admin hoặc Nhân viên Kho).
+  - Add, edit, and delete user accounts.
+  - Assign user roles (Admin or Warehouse Staff).
 
-- **Quản lý Sản Phẩm**:
+- **Product Management**:
 
-  - Thêm mới sản phẩm với thông tin chi tiết như SKU, tên, mô tả, danh mục, số lượng tồn kho và mức tồn kho tối thiểu.
-  - Cập nhật hoặc xóa thông tin sản phẩm khi cần thiết.
+  - Add new products with detailed information, such as SKU, name, description, category, stock quantity, and minimum stock level.
+  - Update or delete product information as needed.
 
-- **Quản lý Giao Dịch**:
+- **Transaction Management**:
 
-  - Xem và phê duyệt các giao dịch nhập/xuất kho.
-  - Thống kê giao dịch theo loại, sản phẩm và thời gian để nắm bắt tình hình kho.
+  - View and approve inbound/outbound transactions.
+  - Track transactions by type, product, and time to monitor warehouse status.
 
-- **Quản lý Lịch Sử Giao Dịch**:
+- **Transaction History Management**:
 
-  - Theo dõi lịch sử giao dịch để có cái nhìn tổng quan về hoạt động của kho.
+  - Track transaction history to gain an overview of warehouse operations.
 
-- **Quản lý Nhà Cung Cấp**:
+- **Supplier Management**:
 
-  - Thêm, sửa, xóa thông tin nhà cung cấp sản phẩm.
+  - Add, edit, and delete supplier information.
 
-- **Báo Cáo và Thống Kê**:
-  - Xem báo cáo tồn kho chi tiết, phát hiện sản phẩm hết hàng hoặc sắp hết hàng.
-  - Hiển thị biểu đồ thống kê lịch sử nhập/xuất và tình trạng tồn kho.
+- **Reports and Analytics**:
+  - View detailed inventory reports to identify products that are out of stock or need replenishment.
+  - Display statistical charts of inbound/outbound history and inventory status.
 
-### 2. Tính Năng Ứng Dụng Di Động (Dành cho Nhân Viên Kho)
+### 2. Mobile Application Features (For Warehouse Staff)
 
-Ứng dụng di động hỗ trợ nhân viên kho trong việc quản lý các công việc hàng ngày, giúp tăng hiệu suất làm việc và giảm thiểu sai sót:
+The mobile application supports warehouse staff in managing daily tasks, helping to increase work efficiency and reduce errors:
 
-- **Đăng Nhập**:
+- **Login**:
 
-  - Đăng nhập an toàn cho nhân viên với tài khoản cá nhân.
+  - Secure login for staff members with personal accounts.
 
-- **Quét Mã Vạch**:
+- **Barcode Scanning**:
 
-  - Hỗ trợ quét mã vạch nhanh chóng khi nhập hoặc xuất hàng hóa.
+  - Quickly scan product barcodes for inbound or outbound operations.
 
-- **Nhập Kho**:
+- **Inbound Operations**:
 
-  - Ghi nhận số lượng sản phẩm nhập kho sau khi quét mã vạch và có thể thêm ghi chú cho giao dịch.
+  - Record the quantity of products added to the warehouse after scanning the barcode, with optional notes for the transaction.
 
-- **Xuất Kho**:
+- **Outbound Operations**:
 
-  - Xác nhận xuất hàng bằng cách quét mã vạch và ghi nhận số lượng sản phẩm xuất kho.
+  - Confirm outbound operations by scanning the barcode and recording product quantities.
 
-- **Kiểm Kê Kho**:
+- **Inventory Check**:
 
-  - Thực hiện kiểm kê kho, ghi nhận và đối chiếu số lượng thực tế.
+  - Perform inventory checks, recording and reconciling actual quantities.
 
-- **Xem Thông Tin Sản Phẩm**:
-  - Hiển thị chi tiết sản phẩm bao gồm tên, SKU, mô tả và số lượng tồn kho hiện tại sau khi quét mã vạch.
+- **Product Information**:
+  - Display detailed product information, including name, SKU, description, and current stock quantity after scanning.
 
-> **Lưu ý:** Chức năng nhận thông báo sẽ được tích hợp trong các phiên bản sau.
+> **Note:** The notification feature will be integrated in future versions.
 
-## Công Nghệ Sử Dụng
+## Technologies Used
 
 - **Frontend Mobile**: Flutter
 - **Frontend Web**: ReactJS
 - **Backend**: NestJS
-- **Cơ sở Dữ Liệu**: MongoDB
+- **Database**: MongoDB
