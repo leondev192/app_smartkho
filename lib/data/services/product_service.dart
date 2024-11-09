@@ -1,4 +1,5 @@
-import 'package:app_smartkho/data/api_client.dart';
+// lib/data/services/product_service.dart
+import '../api_client.dart';
 
 class ProductService {
   final ApiClient _apiClient = ApiClient();

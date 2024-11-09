@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:app_smartkho/data/models/product_model.dart';
 import 'package:app_smartkho/ui/themes/colors.dart';
 import 'package:app_smartkho/ui/themes/fonts.dart';
-import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -21,9 +21,10 @@ class ProductCard extends StatelessWidget {
             Text(
               product.name,
               style: const TextStyle(
-                  fontSize: AppFonts.medium,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor),
+                fontSize: AppFonts.medium,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primaryColor,
+              ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -31,18 +32,75 @@ class ProductCard extends StatelessWidget {
             Text(
               product.description,
               style: const TextStyle(
-                  fontSize: AppFonts.small, color: AppColors.textColorBold),
+                fontSize: AppFonts.small,
+                color: AppColors.textColorBold,
+              ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
-            Text("Kho: ${product.quantityInStock}",
-                style: const TextStyle(
-                    fontSize: AppFonts.small, color: AppColors.textColorBold)),
-            const SizedBox(height: 4),
-            Text("SL tối thiểu: ${product.reorderLevel}",
-                style: const TextStyle(
-                    fontSize: AppFonts.small, color: AppColors.textColorBold)),
+            Row(
+              children: [
+                const Icon(Icons.qr_code, size: 16, color: AppColors.iconColor),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    product.sku,
+                    style: const TextStyle(
+                      fontSize: AppFonts.small,
+                      color: AppColors.textColorBold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.category,
+                    size: 16, color: AppColors.iconColor),
+                const SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    product.category,
+                    style: const TextStyle(
+                      fontSize: AppFonts.small,
+                      color: AppColors.textColorBold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.inventory,
+                    size: 16, color: AppColors.iconColor),
+                const SizedBox(width: 5),
+                Text(
+                  "Kho: ${product.quantityInStock}",
+                  style: const TextStyle(
+                    fontSize: AppFonts.small,
+                    color: AppColors.textColorBold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.warning, size: 16, color: AppColors.iconColor),
+                const SizedBox(width: 5),
+                Text(
+                  "SL tối thiểu: ${product.reorderLevel}",
+                  style: const TextStyle(
+                    fontSize: AppFonts.small,
+                    color: AppColors.textColorBold,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

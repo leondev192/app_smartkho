@@ -1,3 +1,5 @@
+// lib/utils/product_scanner.dart
+import 'package:app_smartkho/data/models/product_model.dart';
 import 'package:app_smartkho/data/respositories/product_responsitory.dart';
 import 'package:app_smartkho/data/services/transaction_service.dart';
 import 'package:app_smartkho/ui/modal/product_info_modal.dart';
@@ -16,9 +18,20 @@ class ProductScanner {
     try {
       var result = await BarcodeScanner.scan();
       if (result.rawContent.isNotEmpty) {
-        final product =
-            await _productRepository.getProductBySKU(result.rawContent);
-        if (product != null) {
+        final products = await _productRepository.getAllProducts();
+        if (products == null) {
+          _showErrorDialog("Không có sản phẩm nào.");
+          return;
+        }
+
+        // Sử dụng firstWhere và trả về Product.empty() nếu không tìm thấy sản phẩm
+        final product = products.firstWhere(
+          (product) => product.sku == result.rawContent,
+          orElse: () =>
+              Product.empty(), // Trả về Product.empty() khi không tìm thấy
+        );
+
+        if (product.id.isNotEmpty) {
           _showProductInfoModal(product);
         } else {
           _showErrorDialog("Sản phẩm không tìm thấy.");
@@ -29,7 +42,7 @@ class ProductScanner {
     }
   }
 
-  // Hàm quét mã và tạo giao dịch (nhập hàng hoặc xuất hàng)
+// Hàm quét mã và tạo giao dịch (nhập hàng hoặc xuất hàng)
   Future<void> scanAndCreateTransaction(String transactionType) async {
     try {
       var result = await BarcodeScanner.scan();
@@ -38,10 +51,15 @@ class ProductScanner {
         return;
       }
 
-      final product =
-          await _productRepository.getProductBySKU(result.rawContent);
-      if (product != null) {
-        _showTransactionForm(product['sku'], transactionType);
+      final products = await _productRepository.getAllProducts();
+      final product = products?.firstWhere(
+        (product) => product.sku == result.rawContent,
+        orElse: () => Product.empty(), // Trả về Product rỗng khi không tìm thấy
+      );
+
+      if (product != null && product.id.isNotEmpty) {
+        // Kiểm tra nếu product không phải là Product rỗng và không phải null
+        _showTransactionForm(product.sku, transactionType);
       } else {
         _showErrorDialog("Sản phẩm không tìm thấy.");
       }
@@ -194,7 +212,7 @@ class ProductScanner {
   }
 
   // Hiển thị thông tin sản phẩm trong modal
-  void _showProductInfoModal(Map<String, dynamic> product) {
+  void _showProductInfoModal(Product product) {
     if (navigatorKey.currentContext == null) return;
 
     showModalBottomSheet(
@@ -205,13 +223,13 @@ class ProductScanner {
       ),
       builder: (context) {
         return ProductInfoModal(
-          name: product['name'],
-          sku: product['sku'],
-          description: product['description'],
-          category: product['category'],
-          quantityInStock: product['quantityInStock'],
-          reorderLevel: product['reorderLevel'],
-          createdAt: product['createdAt'],
+          name: product.name,
+          sku: product.sku,
+          description: product.description,
+          category: product.category,
+          quantityInStock: product.quantityInStock,
+          reorderLevel: product.reorderLevel,
+          createdAt: product.createdAt,
         );
       },
     );

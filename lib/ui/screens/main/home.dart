@@ -1,10 +1,11 @@
+import 'package:app_smartkho/ui/widgets/cards/stat_card.dart';
+import 'package:app_smartkho/ui/widgets/charts/transaction_chart.dart';
 import 'package:app_smartkho/ui/widgets/loadings/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:app_smartkho/ui/themes/colors.dart';
 import 'package:app_smartkho/data/services/product_service.dart';
 import 'package:app_smartkho/data/services/transaction_service.dart';
+import 'package:app_smartkho/ui/themes/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,11 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int totalInTransactions = 0;
   int totalOutTransactions = 0;
   int pendingTransactions = 0;
+  bool _isLoading = true;
 
   String email = '';
   String fullName = '';
   String avatarUrl = '';
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -61,9 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _isLoading = false;
       });
     } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
       print("Error fetching data: $e");
     }
   }
@@ -91,17 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Text(
                       'Xin chào 👋',
                       style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textColorBold,
-                      ),
+                          fontSize: 14, color: AppColors.textColorBold),
                     ),
-                    Text(
-                      fullName,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
+                    Text(fullName,
+                        style: const TextStyle(
+                            fontSize: 14, color: AppColors.primaryColor)),
                   ],
                 ),
               ],
@@ -110,17 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(
-                    Icons.search_rounded,
-                    color: AppColors.primaryColor,
-                  ),
+                  icon: const Icon(Icons.search_rounded,
+                      color: AppColors.primaryColor),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(
-                    Icons.notifications_rounded,
-                    color: AppColors.primaryColor,
-                  ),
+                  icon: const Icon(Icons.notifications_rounded,
+                      color: AppColors.primaryColor),
                 ),
               ],
             ),
@@ -138,7 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     _buildQuickStats(),
                     const SizedBox(height: 20),
-                    _buildTransactionChart(),
+                    TransactionChart(
+                      totalIn: totalInTransactions,
+                      totalOut: totalOutTransactions,
+                      transactionService: _transactionService,
+                    ),
                   ],
                 ),
               ),
@@ -154,102 +147,27 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       children: [
-        _buildStatCard(
-            "Tổng sản phẩm", totalProducts, Icons.inventory, Colors.blue),
-        _buildStatCard("Giao dịch nhập", totalInTransactions,
-            Icons.arrow_downward, Colors.green),
-        _buildStatCard("Giao dịch xuất", totalOutTransactions,
-            Icons.arrow_upward, Colors.red),
-        _buildStatCard(
-            "Chờ duyệt", pendingTransactions, Icons.pending, Colors.orange),
+        StatCard(
+            title: "Tổng sản phẩm",
+            count: totalProducts,
+            icon: Icons.inventory,
+            color: Colors.blue),
+        StatCard(
+            title: "Giao dịch nhập",
+            count: totalInTransactions,
+            icon: Icons.arrow_downward,
+            color: Colors.green),
+        StatCard(
+            title: "Giao dịch xuất",
+            count: totalOutTransactions,
+            icon: Icons.arrow_upward,
+            color: Colors.red),
+        StatCard(
+            title: "Chờ duyệt",
+            count: pendingTransactions,
+            icon: Icons.pending,
+            color: Colors.orange),
       ],
     );
-  }
-
-  Widget _buildStatCard(String title, int count, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color, size: 30),
-          const SizedBox(height: 10),
-          Text(
-            "$count",
-            style: TextStyle(
-                fontSize: 20, color: color, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 5),
-          Text(title, style: const TextStyle(fontSize: 14)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTransactionChart() {
-    return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Text(
-                "Tỷ lệ giao dịch Nhập - Xuất",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 15),
-              AspectRatio(
-                aspectRatio: 1.2,
-                child: PieChart(
-                  PieChartData(
-                    sections: _buildPieChartSections(),
-                    sectionsSpace: 2,
-                    centerSpaceRadius: 40,
-                    borderData: FlBorderData(show: false),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  List<PieChartSectionData> _buildPieChartSections() {
-    final double total = totalInTransactions + totalOutTransactions.toDouble();
-
-    return [
-      PieChartSectionData(
-        color: Colors.green,
-        value: totalInTransactions.toDouble(),
-        title: '${((totalInTransactions / total) * 100).toStringAsFixed(1)}%',
-        radius: 50,
-        titleStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
-      PieChartSectionData(
-        color: Colors.red,
-        value: totalOutTransactions.toDouble(),
-        title: '${((totalOutTransactions / total) * 100).toStringAsFixed(1)}%',
-        radius: 50,
-        titleStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
-    ];
   }
 }

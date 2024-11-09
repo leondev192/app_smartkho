@@ -1,5 +1,3 @@
-// models/transaction_model.dart
-
 class TransactionModel {
   final String id;
   final String productId;
