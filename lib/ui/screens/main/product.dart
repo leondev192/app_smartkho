@@ -1,3 +1,4 @@
+import 'package:app_smartkho/ui/themes/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:app_smartkho/data/respositories/product_responsitory.dart';
 import 'package:app_smartkho/data/models/product_model.dart';
@@ -46,8 +47,13 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Danh sách sản phẩm",
-            style: TextStyle(color: AppColors.textColorBold)),
+        title: const Center(
+          child: const Text(
+            "Danh sách sản phẩm",
+            style: TextStyle(
+                color: AppColors.whiteColor, fontSize: AppFonts.xxLarge),
+          ),
+        ),
         backgroundColor: AppColors.primaryColor,
       ),
       body: _isLoading && !_isRefreshing

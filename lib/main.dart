@@ -4,9 +4,12 @@ import 'package:app_smartkho/ui/screens/main_screen.dart';
 import 'package:app_smartkho/ui/themes/app_theme.dart';
 import 'package:app_smartkho/utils/checkStatus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   runApp(
     MultiProvider(
       providers: [

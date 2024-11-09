@@ -55,8 +55,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Lịch sử giao dịch",
-            style: TextStyle(fontSize: AppFonts.large)),
+        title: const Center(
+          child: const Text(
+            "Lịch sử giao dịch",
+            style: TextStyle(
+                color: AppColors.whiteColor, fontSize: AppFonts.xxLarge),
+          ),
+        ),
         backgroundColor: AppColors.primaryColor,
       ),
       body: Column(

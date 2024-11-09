@@ -78,6 +78,7 @@ flutter:
     - assets/images/smartkho.png
     - assets/animations/loading.json
     - assets/fonts/
+    - .env
   fonts:
     - family: Arima
       fonts:
