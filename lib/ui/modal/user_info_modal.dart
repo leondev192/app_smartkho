@@ -10,14 +10,14 @@ class UserInfoModal extends StatelessWidget {
   final String createdAt;
 
   const UserInfoModal({
-    Key? key,
+    super.key,
     required this.fullName,
     required this.email,
     required this.avatarUrl,
     required this.phoneNumber,
     required this.address,
     required this.createdAt,
-  }) : super(key: key);
+  });
 
   String _formatDate(String dateString) {
     try {

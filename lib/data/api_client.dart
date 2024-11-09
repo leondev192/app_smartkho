@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiClient {
   final Dio dio;
@@ -6,7 +7,7 @@ class ApiClient {
   ApiClient()
       : dio = Dio(
           BaseOptions(
-            baseUrl: 'https://be-smartkho.onrender.com/api/v1',
+            baseUrl: dotenv.env['API_BASE_URL'] ?? '',
             connectTimeout: const Duration(milliseconds: 10000),
             receiveTimeout: const Duration(milliseconds: 10000),
             headers: {

@@ -1,4 +1,4 @@
-import 'package:app_smartkho/logic/providers/auth_provider.dart';
+import 'package:app_smartkho/providers/auth_provider.dart';
 import 'package:app_smartkho/ui/modal/user_info_modal.dart';
 import 'package:app_smartkho/ui/themes/colors.dart';
 import 'package:app_smartkho/ui/themes/fonts.dart';
@@ -60,6 +60,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 await Provider.of<AuthProvider>(context, listen: false)
                     .logout();
                 // Điều hướng đến màn hình đăng nhập
+                // ignore: use_build_context_synchronously
                 Navigator.pushReplacementNamed(context, '/login');
               },
               child: const Text(
@@ -129,14 +130,14 @@ class _AccountScreenState extends State<AccountScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '$fullName',
+                                  fullName,
                                   style: const TextStyle(
                                       fontSize: AppFonts.xLarge,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.primaryColor),
                                 ),
                                 Text(
-                                  '$email',
+                                  email,
                                   style:
                                       const TextStyle(fontSize: AppFonts.small),
                                 ),
@@ -144,14 +145,14 @@ class _AccountScreenState extends State<AccountScreen> {
                             ),
                           ],
                         ),
-                        const Padding(padding: const EdgeInsets.only(top: 30)),
+                        const Padding(padding: EdgeInsets.only(top: 30)),
                         const SizedBox(
                           height: 20,
                         ),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Tài khoản',
                               style: TextStyle(
                                 fontSize: AppFonts.large,
@@ -209,7 +210,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               height: 20,
                             ),
                             Expanded(
-                              child: const Divider(
+                              child: Divider(
                                 thickness: 1,
                                 color: AppColors.borderColor,
                               ),
@@ -222,7 +223,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               'Trợ giúp và hỗ trợ',
                               style: TextStyle(
                                 fontSize: AppFonts.large,
@@ -352,7 +353,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               height: 20,
                             ),
                             Expanded(
-                              child: const Divider(
+                              child: Divider(
                                 thickness: 1,
                                 color: AppColors.borderColor,
                               ),
@@ -407,7 +408,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 top: screenHeight * 0.10,
                 left: screenWidth * 0.07,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage('$avatarUrl'),
+                  backgroundImage: NetworkImage(avatarUrl),
                   backgroundColor: AppColors.whiteColor,
                   radius: 60,
                 ),

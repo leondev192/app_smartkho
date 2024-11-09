@@ -2,6 +2,7 @@ import 'package:app_smartkho/ui/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginwithgoogleButton extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final onPressed;
   const LoginwithgoogleButton({
     super.key,
@@ -22,14 +23,14 @@ class LoginwithgoogleButton extends StatelessWidget {
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Image(
+            Image(
                 image: AssetImage('assets/images/google.png'),
                 height: 20,
                 width: 20),
-            const SizedBox(
+            SizedBox(
               width: 20,
             ),
-            const Text('Đăng nhập với google'),
+            Text('Đăng nhập với google'),
           ],
         ),
       ),

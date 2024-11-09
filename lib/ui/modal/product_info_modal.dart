@@ -11,7 +11,7 @@ class ProductInfoModal extends StatelessWidget {
   final String createdAt;
 
   const ProductInfoModal({
-    Key? key,
+    super.key,
     required this.name,
     required this.sku,
     required this.description,
@@ -19,7 +19,7 @@ class ProductInfoModal extends StatelessWidget {
     required this.quantityInStock,
     required this.reorderLevel,
     required this.createdAt,
-  }) : super(key: key);
+  });
 
   String _formatDate(String dateString) {
     try {

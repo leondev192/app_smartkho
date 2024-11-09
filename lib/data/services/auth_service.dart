@@ -20,7 +20,7 @@ class AuthService {
         print('Unexpected response: ${response.data}');
         return null;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         print('Error response: ${e.response?.data}');
         return e.response?.data;

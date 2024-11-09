@@ -1,4 +1,4 @@
-import 'package:app_smartkho/logic/providers/auth_provider.dart';
+import 'package:app_smartkho/providers/auth_provider.dart';
 import 'package:app_smartkho/ui/screens/auth/login.dart';
 import 'package:app_smartkho/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';

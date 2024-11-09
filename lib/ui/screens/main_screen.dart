@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:app_smartkho/utils/product_scanner.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

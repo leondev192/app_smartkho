@@ -1,4 +1,4 @@
-import 'package:app_smartkho/logic/providers/auth_provider.dart';
+import 'package:app_smartkho/providers/auth_provider.dart';
 import 'package:app_smartkho/ui/themes/colors.dart';
 import 'package:app_smartkho/ui/widgets/buttons/gradient_button.dart';
 import 'package:app_smartkho/ui/widgets/buttons/loginWithGoogle_button.dart';
@@ -69,11 +69,14 @@ class _LoginScreenState extends State<LoginScreen> {
       information.setString('createdAt', createdAt);
       information.setString('address', address);
 
+      // ignore: use_build_context_synchronously
       await Provider.of<AuthProvider>(context, listen: false).login(token);
 
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, '/main');
     } else {
       final errorMessage = result?['message'] ?? 'Đăng nhập thất bại.';
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -143,17 +146,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Divider(
                         color: Color.fromRGBO(224, 229, 236, 100),
                         thickness: 1,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text('Hoặc'),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Divider(
                         color: Color.fromRGBO(224, 229, 236, 100),
                         thickness: 1,
